@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import History from "../components/History"
+import Moviecard from "../components/Moviecard"
 
 export default function Home(){
     const [search, setSearch]= useState()
@@ -11,9 +12,6 @@ export default function Home(){
     console.log("Denne kommer fra storage", storedHistory)
     
     const baseUrl = `http://www.omdbapi.com/?s=${search}&apikey=`
-    // IKKE SKRIV DET PÅ DENNE MÅTEN
-    // IKKE TRYKT
-    // U DEAD
     
     // husk å legg til key
     const apiKey = import.meta.env.VITE_APP_API_KEY
@@ -23,7 +21,7 @@ export default function Home(){
     }, [history])
     
 
-    const getMovies = async()=>{
+    const getMovies = async()=>{   
         try
         {
             const response = await fetch(`${baseUrl}${apiKey}`)
@@ -62,7 +60,7 @@ export default function Home(){
                 {focused ? <History history={history} setSearch={setSearch}/> : null }
                 <button onClick={getMovies}>Søk</button>
             </form>
-            
+            <Moviecard />
         </main>
     )
 }
