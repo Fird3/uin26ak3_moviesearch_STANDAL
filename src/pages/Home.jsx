@@ -5,22 +5,24 @@ import Moviecard from "../components/Moviecard"
 
 export default function Home(){
     const [movie, setMovie] = useState([])
-    const [search, setSearch]= useState()
-    const storedHistory = localStorage.getItem("search")
-    const [focused, setFocused]= useState(false)
+    const [search, setSearch]= useState("James-Bond")
+    // const storedHistory = localStorage.getItem("search")
+    //const [focused, setFocused]= useState(false)
     // tom array så vi kan legge til ting når vi bruker search og local storage
-    const [history, setHistory]= useState(storedHistory ? JSON.parse(storedHistory) : [])
+    // const [history, setHistory]= useState(storedHistory ? JSON.parse(storedHistory) : [])
 
-    console.log("Denne kommer fra storage", storedHistory)
+    // console.log("Denne kommer fra storage", storedHistory)
     
     const baseUrl = `http://www.omdbapi.com/?s=${search}&apikey=`
     
     // husk å legg til key
     const apiKey = import.meta.env.VITE_APP_API_KEY
 
-    useEffect(()=>{
-        localStorage.setItem("search", JSON.stringify(history))
-    }, [history])
+    // useEffect(()=>{
+    //     localStorage.setItem("search", JSON.stringify(history))
+    // }, [history])
+
+    console.log(movie)
     
 
     const getMovies = async()=>{   
@@ -44,6 +46,8 @@ export default function Home(){
         setSearch(e.target.value)
     }
 
+
+    console.log(search)
    
     const handleSubmit = (e) =>{
         // sann den ikke refresher
@@ -51,25 +55,29 @@ export default function Home(){
         // sann input fjerner tekst etter du har trykket på søk
         e.target.reset()
 
-        setHistory((prev) => [...prev, search])
+        // setHistory((prev) => [...prev, search])
 
     
     }
-    console.log(history)
+
+    // console.log(movie.map(mo => m movie.filter(item => item?.imdbID === mo.imdbID)))
+
     return(
         <main>
             <h1>Forside</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Søk etter film:
-                    <input type="search" placeholder="Harry Potter" onChange={handleChange} onFocus={()=> setFocused(true)} /*onBlur={()=> setFocused(false)}*/></input>
+                    <input type="search" placeholder="Harry Potter" onChange={handleChange}  /*onBlur={()=> setFocused(false)}*/></input>
                 </label>
-                {focused ? <History history={history} setSearch={setSearch}/> : null }
+                {/*focused ? <History history={history} setSearch={setSearch}/> : null*/ }
+                 <button onClick={getMovies}>Søk</button>
             </form>
-            <button onClick={getMovies}>Søk</button>
+           
             <section className="movies-style">
-                <h2>James Bond</h2>
-                {movie?.map((item)=> <Moviecard key={item.imdbID + "rt"} item={item} />)}
+                
+                
+                { movie?.map((item)=> <Moviecard key={item.imdbID + "rt"} item={item} />)}
             </section>
             
         </main>

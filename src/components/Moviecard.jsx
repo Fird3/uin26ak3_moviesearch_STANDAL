@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+
 import '../style/style.css'
-export default function Moviecard({url, item}){
+export default function Moviecard({item}){
 
     // const [apiData, setapiData] = useState({})
     // const {movie} = useParams()
