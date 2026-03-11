@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import History from "../components/History"
 import Moviecard from "../components/Moviecard"
+import { useOutletContext } from "react-router-dom"
 
 
 export default function Home(){
     const [movie, setMovie] = useState([])
     const [search, setSearch]= useState("James-Bond")
+    
     // const storedHistory = localStorage.getItem("search")
     //const [focused, setFocused]= useState(false)
     // tom array så vi kan legge til ting når vi bruker search og local storage
