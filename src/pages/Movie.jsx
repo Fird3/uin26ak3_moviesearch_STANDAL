@@ -2,29 +2,28 @@ import { useOutletContext, useParams } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 
-export default function Movie({item, url}){
+export default function Movie({item}){
     const {movie} = useParams()
-    const [apiData, setapiData] = useState({})
+    // const [apiData, setapiData] = useState({})
+
     
 
-    const {Title, Poster, Year} = item
+    // const {Title, Poster, Year} = item
 
-    const getData = async() =>{
-        const response = await fetch(url)
-        const data = await response.json()
-        setapiData(data)
-    }
+    // const getData = async() =>{
+    //     const response = await fetch(url)
+    //     const data = await response.json()
+    //     setapiData(data)
+    // }
 
-     useEffect(()=>{
-            getData()
-        },[])
+    //  useEffect(()=>{
+    //         getData()
+    //     },[])
 
     return(
         <section>
            <h1>{movie}</h1>  
-           <h3>{Title}</h3>      
-           <p>{Year}</p>
-           <img src={Poster} alt={Title}/>  
+           <p>{movie.Year}</p> 
         </section>
     )
 }

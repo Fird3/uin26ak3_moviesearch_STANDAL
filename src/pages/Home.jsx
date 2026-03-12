@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import History from "../components/History"
 import Moviecard from "../components/Moviecard"
 import { useOutletContext } from "react-router-dom"
+import Results from "../components/Results"
 
 
 export default function Home(){
@@ -27,6 +28,8 @@ export default function Home(){
     console.log(movie)
     
 
+    
+
     const getMovies = async()=>{   
         try
         {
@@ -40,16 +43,27 @@ export default function Home(){
         }
     }
     
+    
     useEffect(()=> {
         getMovies()
     }, [])
 
+
     const handleChange = (e) => {
         setSearch(e.target.value)
+
+        // Begynner å søke automatisk etter 3 bokstaver, men må fortsatt trykke på søk knappen på å få opp alle søkene
+         if(search.length >= 3){
+         getMovies()
+        }
+        else
+        {
+            null
+        }
     }
 
 
-    console.log(search)
+    console.log("dette er search", search)
    
     const handleSubmit = (e) =>{
         // sann den ikke refresher
@@ -66,7 +80,7 @@ export default function Home(){
 
     return(
         <main>
-            <h1>Forside</h1>
+            <h1>Film API</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Søk etter film:
@@ -75,13 +89,7 @@ export default function Home(){
                 {/*focused ? <History history={history} setSearch={setSearch}/> : null*/ }
                  <button onClick={getMovies}>Søk</button>
             </form>
-           
-            <section className="movies-style">
-                
-                
-                { movie?.map((item)=> <Moviecard key={item.imdbID + "rt"} item={item} />)}
-            </section>
-            
+            <Results movie={movie}/>
         </main>
     )
 }
