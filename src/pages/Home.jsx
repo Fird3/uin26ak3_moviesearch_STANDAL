@@ -5,8 +5,8 @@ import { useOutletContext } from "react-router-dom"
 import Results from "../components/Results"
 
 
-export default function Home(){
-    const [movie, setMovie] = useState([])
+
+export default function Home({setMovies, movies}){
     const [search, setSearch]= useState("James-Bond")
     
     // const storedHistory = localStorage.getItem("search")
@@ -25,14 +25,14 @@ export default function Home(){
     //     localStorage.setItem("search", JSON.stringify(history))
     // }, [history])
 
-    console.log(movie)
+    console.log(movies)
  
     const getMovies = async()=>{   
         try
         {
             const response = await fetch(`${baseUrl}${apiKey}`)
             const data = await response.json()
-            setMovie(data.Search)
+            setMovies(data.Search)
             console.log(data)
         }
         catch(err){
@@ -50,13 +50,13 @@ export default function Home(){
         setSearch(e.target.value)
 
         // Begynner å søke automatisk etter 3 bokstaver, men må fortsatt trykke på søk knappen på å få opp alle søkene
-         if(search.length >= 3){
-         getMovies()
-        }
-        else
-        {
-            null
-        }
+        //  if(search.length >= 3){
+        //  getMovies()
+        // }
+        // else
+        // {
+        //     null
+        // }
     }
 
 
@@ -86,7 +86,7 @@ export default function Home(){
                 {/*focused ? <History history={history} setSearch={setSearch}/> : null*/ }
                  <button onClick={getMovies}>Søk</button>
             </form>
-            <Results movie={movie}/>
+            <Results movies={movies}/>
         </main>
     )
 }

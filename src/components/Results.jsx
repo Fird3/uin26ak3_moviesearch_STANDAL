@@ -1,8 +1,8 @@
 import Moviecard from "./Moviecard"
-export default function Results({movie}){
+export default function Results({movies}){
     return(
         <section className="movies-style">        
-            { movie?.map((item)=> <Moviecard key={item.imdbID + "rt"} item={item} />)}
+            {movies?.map((item)=> <Moviecard key={item.imdbID + "rt"} item={item} />)}
         </section>
     )
 }

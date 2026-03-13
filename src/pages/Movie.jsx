@@ -2,12 +2,9 @@ import { useOutletContext, useParams } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 
-export default function Movie({item}){
+export default function Movie({movies, item}){
     const {movie} = useParams()
     // const [apiData, setapiData] = useState({})
-
-    
-
     // const {Title, Poster, Year} = item
 
     // const getData = async() =>{
@@ -19,11 +16,13 @@ export default function Movie({item}){
     //  useEffect(()=>{
     //         getData()
     //     },[])
+    console.log(movie)
 
     return(
         <section>
            <h1>{movie}</h1>  
-           <p>{movie.Year}</p> 
+           {/* <h2>{Title}</h2> */}
+
         </section>
     )
 }

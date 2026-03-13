@@ -2,7 +2,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../style/style.css'
-export default function Moviecard({item, url}){
+export default function Moviecard({item}){
 
     const [apiData, setapiData] = useState({})
     const [apiEndpoint, setApiEndpoint] = useState()
