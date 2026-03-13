@@ -10,7 +10,7 @@ export default function Home(){
     const [search, setSearch]= useState("James-Bond")
     
     // const storedHistory = localStorage.getItem("search")
-    //const [focused, setFocused]= useState(false)
+    // const [focused, setFocused]= useState(false)
     // tom array så vi kan legge til ting når vi bruker search og local storage
     // const [history, setHistory]= useState(storedHistory ? JSON.parse(storedHistory) : [])
 
@@ -26,10 +26,7 @@ export default function Home(){
     // }, [history])
 
     console.log(movie)
-    
-
-    
-
+ 
     const getMovies = async()=>{   
         try
         {
@@ -43,7 +40,7 @@ export default function Home(){
         }
     }
     
-    
+
     useEffect(()=> {
         getMovies()
     }, [])
@@ -93,5 +90,3 @@ export default function Home(){
         </main>
     )
 }
-
-// Fikk hjelp av Jesper til å finne ut at jeg måtte ha button utenfor form for å få fram alle filmene mine
