@@ -4,9 +4,12 @@ import Moviecard from "../components/Moviecard"
 import { useOutletContext } from "react-router-dom"
 import Results from "../components/Results"
 
+// Mye av det som er kommentert ut er fra forelesning vi hadde om localstorage. 
+// Men deler av det er også kommentarer til hjelpemidler jeg har brukt i koden
 
 
 export default function Home({setMovies, movies}){
+    // Hjelp av Ann-Charlott til å komme på at det er her jeg burded sette James-Bond
     const [search, setSearch]= useState("James-Bond")
     
     // const storedHistory = localStorage.getItem("search")
@@ -18,7 +21,6 @@ export default function Home({setMovies, movies}){
     
     const baseUrl = `http://www.omdbapi.com/?s=${search}&apikey=`
     
-    // husk å legg til key
     const apiKey = import.meta.env.VITE_APP_API_KEY
 
     // useEffect(()=>{
@@ -27,7 +29,11 @@ export default function Home({setMovies, movies}){
 
     console.log(movies)
  
-    const getMovies = async()=>{   
+    const getMovies = async()=>{ 
+        
+        //jeg hadde funksjonen selv, men med hjelp av AI fikk jeg vite hvor det var best at jeg satt den. Hjelpen jeg fikk av AI ligger i mappen med bilder.
+
+        if(search.length < 5) return
         try
         {
             const response = await fetch(`${baseUrl}${apiKey}`)
@@ -40,25 +46,13 @@ export default function Home({setMovies, movies}){
         }
     }
     
-
     useEffect(()=> {
-        getMovies()
+           getMovies()
     }, [])
-
 
     const handleChange = (e) => {
         setSearch(e.target.value)
-
-        // Begynner å søke automatisk etter 3 bokstaver, men må fortsatt trykke på søk knappen på å få opp alle søkene
-        //  if(search.length >= 3){
-        //  getMovies()
-        // }
-        // else
-        // {
-        //     null
-        // }
     }
-
 
     console.log("dette er search", search)
    
@@ -69,11 +63,7 @@ export default function Home({setMovies, movies}){
         e.target.reset()
 
         // setHistory((prev) => [...prev, search])
-
-    
     }
-
-    // console.log(movie.map(mo => m movie.filter(item => item?.imdbID === mo.imdbID)))
 
     return(
         <main>
